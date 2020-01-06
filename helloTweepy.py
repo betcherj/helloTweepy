@@ -13,7 +13,7 @@ tokens = config._sections['tokens']
 auth = tweepy.OAuthHandler(tokens['pk'], tokens['sk']
 )
 
-auth.set_access_token(tokens['acesstoken'], tokens['acesstokensecret']
+auth.set_access_token(tokens['at'], tokens['ats']
 )
 api = tweepy.API(auth, wait_on_rate_limit = True)
 
@@ -29,7 +29,6 @@ user = api.get_user('jackybetch')
 friends = api.friends_ids('jackybetch')
 for friend in friends:
     temp = api.friends_ids(friend)
-    time.sleep(random.randint(0,10))
     if len(temp)<400:
         if user.id not in temp:
             print(api.get_user(friend).screen_name, 'doesnt follow back')
