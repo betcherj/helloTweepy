@@ -1,8 +1,19 @@
 import tweepy
+import time
+import os
+import configparser
+import random
+
+config_file = dir_path = os.path.dirname(os.path.realpath(__file__)) + "\\tweepy_config.ini"
+
+config = configparser.ConfigParser()
+config.read(config_file)
+tokens = config._sections['tokens']
 #authentication
-auth = tweepy.OAuthHandler('TsNTi5WMTYQzXhwFOGdJC3X8L', 'wn6EKOTVzBMIpMRYhfOIVKKc3qbcYiTRBUhsDlBjjd9AwkGqft'
+auth = tweepy.OAuthHandler(tokens['pk'], tokens['sk']
 )
-auth.set_access_token('586132573-WRDsgPNNAofrIhMZYZ9p2gm2EIGTQ47uWampLh4M', 'mK3uxoYCBvqzlHW35JdEevhfyig55KnICGhDTnNK53yNl'
+
+auth.set_access_token(tokens['acesstoken'], tokens['acesstokensecret']
 )
 api = tweepy.API(auth, wait_on_rate_limit = True)
 
@@ -18,9 +29,10 @@ user = api.get_user('jackybetch')
 friends = api.friends_ids('jackybetch')
 for friend in friends:
     temp = api.friends_ids(friend)
+    time.sleep(random.randint(0,10))
     if len(temp)<400:
         if user.id not in temp:
-            print api.get_user(friend).screen_name, 'is a little bitch'
+            print(api.get_user(friend).screen_name, 'doesnt follow back')
 
 public_tweets = api.home_timeline()
 
